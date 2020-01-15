@@ -38,3 +38,57 @@ def student_create(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+
+@csrf_exempt
+def student_delete(request,enroll):
+    print (request.method)
+    try:
+        student=Student.objects.get(pk=enroll)
+    except Student.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'POST':       #We are using POST, instead. Just end with trailing slash and does not include body
+        student.delete()
+        return HttpResponse(status=204)
+
+@csrf_exempt
+def student_update(request,enroll):
+    try:
+        student=Student.objects.get(pk=enroll)
+    except Student.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'PUT':                 #end url with trailing slash : http://localhost:8000/update/6/
+        data = JSONParser().parse(request)
+        serializer = StudentSerializer(student, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def tag_create(request):
+   
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        enroll=data['student']
+        try:
+            student=Student.objects.get(pk=enroll)
+        except Student.DoesNotExist:
+            return HttpResponse(status=404)
+
+        serializer = TagSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+
+#Todo Register as alumni
+#Users:
+    #Student : view all details
+    #Admin   : CRUD on student
+    #Teachers: View academic details only
+

@@ -10,7 +10,17 @@ class StudentSerializer(serializers.Serializer):
     password=serializers.CharField(max_length=2000)
 
     def create(self, validated_data):
+        print(**validated_data)
         return Student.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.enrollmentNumber = validated_data.get('enrollmentNumber', instance.enrollmentNumber)
+        instance.name = validated_data.get('name', instance.name)
+        instance.course = validated_data.get('course', instance.course)
+        instance.year = validated_data.get('year', instance.year)
+        instance.password = validated_data.get('style', instance.password)
+        instance.save()
+        return instance
         
 
 
@@ -19,16 +29,28 @@ class AdminSerializer(serializers.Serializer):
     password=serializers.CharField(max_length=2000)
 
     def create(self, validated_data):
+
         return Admin.objects.create(**validated_data)
 
 
 
 class TagSerializer(serializers.Serializer):
     tagUID=serializers.CharField(max_length=200)
-    #student=serializers.OneToOneField(Student,on_delete=models.CASCADE)
+    student=serializers.CharField(max_length=20)
 
     def create(self, validated_data):
-        return Tag.objects.create(**validated_data)
+        enroll=validated_data['student']
+        get_student=Student.objects.get(pk=enroll)
+        
+        new_validated_data={
+            'student':None,
+            'tagUID' :validated_data['tagUID']
+        }
+        
+        newTag= Tag.objects.create(**new_validated_data)
+        newTag.student=get_student
+        newTag.save()
+        return newTag
 
 
 

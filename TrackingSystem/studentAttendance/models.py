@@ -20,7 +20,7 @@ class Admin(models.Model):
 
 class Tag(models.Model):
     tagUID=models.CharField(max_length=200)
-    student=models.OneToOneField(Student,on_delete=models.CASCADE)
+    student=models.OneToOneField(Student,on_delete=models.CASCADE,blank=True,null=True)
 
 
 class TapTiming(models.Model):
