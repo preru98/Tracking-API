@@ -6,14 +6,31 @@ from studentAttendance.serializers import TagSerializer,StudentSerializer,AdminS
 
 # Create your views here.
 
-@csrf_exempt
+#List of Registered Students
 def student_list(request):
     if request.method == 'GET':
         allStudents = Student.objects.all()
         serializer = StudentSerializer(allStudents, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
+
+
+#Detail of a Student
+def student_detail(request,enroll):
+    if request.method == 'GET':
+        try:
+            student=Student.objects.get(pk=enroll)
+        except Student.DoesNotExist:
+            return HttpResponse(status=404)
+
+        serializer = StudentSerializer(student)
+        return JsonResponse(serializer.data)
+
+
+#Register Student       
+@csrf_exempt
+def student_create(request):
+    if request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = StudentSerializer(data=data)
         if serializer.is_valid():
