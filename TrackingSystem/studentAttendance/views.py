@@ -9,7 +9,7 @@ from studentAttendance.serializers import TagSerializer,StudentSerializer,AdminS
 @csrf_exempt
 def student_list(request):
     if request.method == 'GET':
-        allStudents = Snippet.objects.all()
+        allStudents = Student.objects.all()
         serializer = StudentSerializer(allStudents, many=True)
         return JsonResponse(serializer.data, safe=False)
 

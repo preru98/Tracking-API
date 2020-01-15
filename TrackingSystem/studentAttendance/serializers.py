@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from studentAttendance.models import Tag,Student,Admin,TapTiming
+from django.utils import timezone
 
 class StudentSerializer(serializers.Serializer):
-    enrollmentNumber=serializers.CharField(max_length=20,primary_key=True)
+    enrollmentNumber=serializers.CharField(max_length=20)
     name=serializers.CharField(max_length=2000)
     course=serializers.CharField(max_length=2000)
     year=serializers.CharField(max_length=2000)
@@ -24,7 +25,7 @@ class AdminSerializer(serializers.Serializer):
 
 class TagSerializer(serializers.Serializer):
     tagUID=serializers.CharField(max_length=200)
-    student=serializers.OneToOneField(Student,on_delete=models.CASCADE)
+    #student=serializers.OneToOneField(Student,on_delete=models.CASCADE)
 
     def create(self, validated_data):
         return Tag.objects.create(**validated_data)
@@ -33,7 +34,7 @@ class TagSerializer(serializers.Serializer):
 
 class TapTimingSerializer(serializers.Serializer):
     tapAt=serializers.DateTimeField(default=timezone.now)
-    tag=serializers.ForeignKey(Tag, on_delete=models.CASCADE)
+    #tag=serializers.ForeignKey(Tag, on_delete=models.CASCADE)
 
     def create(self, validated_data):
         return TapTiming.objects.create(**validated_data)
