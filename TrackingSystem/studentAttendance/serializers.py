@@ -36,19 +36,19 @@ class AdminSerializer(serializers.Serializer):
 
 class TagSerializer(serializers.Serializer):
     tagUID=serializers.CharField(max_length=200)
-    student=serializers.CharField(max_length=20)
+    student=serializers.CharField(max_length=20,read_only = True)
 
     def create(self, validated_data):
         enroll=validated_data['student']
         get_student=Student.objects.get(pk=enroll)
         
         new_validated_data={
-            'student':None,
+            'student':get_student, 
             'tagUID' :validated_data['tagUID']
         }
         
         newTag= Tag.objects.create(**new_validated_data)
-        newTag.student=get_student
+        # newTag.student=get_student
         newTag.save()
         return newTag
 
