@@ -8,4 +8,10 @@ urlpatterns = [
     path('delete/<int:enroll>/',views.student_delete),
     path('update/<int:enroll>/',views.student_update),
     path('map/',views.tag_create),
+    path('mapTag/',views.map_tag),
+    path('viewTags/',views.tag_list),
 ]
+
+# { "tag":"ABC",
+#    "studentRollNumber":"3" 
+# }

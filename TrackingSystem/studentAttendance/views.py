@@ -84,6 +84,44 @@ def tag_create(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+@csrf_exempt
+def map_tag(request):
+
+    if request.method=='POST':
+        data=JSONParser().parse(request)
+        enroll=data['studentRollNumber']
+        student=Student.objects.get(pk=enroll)
+        tagId=data['tag']
+        newTag=Tag(tagUID=tagId,student=student)
+        newTag.save()
+        responseDict={
+            'successful':True,
+
+            }
+        tagObject=JSONParser().parse(newTag)
+        return JsonResponse(tagObject,status=200)
+
+@csrf_exempt
+def map_tag(request):
+
+    if request.method=='POST':
+        data=JSONParser().parse(request)
+        enroll=data['studentRollNumber']
+        student=Student.objects.get(pk=enroll)
+        tagId=data['tag']
+        newTag=Tag(tagUID=tagId,student=student)
+        newTag.save()
+        responseDict={
+            'successful':True,
+        }
+        # tagObject=JSONParser().parse(newTag)
+        return JsonResponse(responseDict,status=200)
+
+def tag_list(request):
+    if request.method == 'GET':
+        allTags = Tag.objects.all()
+        serializer = TagSerializer(allTags, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 #Todo Register as alumni
@@ -91,4 +129,5 @@ def tag_create(request):
     #Student : view all details
     #Admin   : CRUD on student
     #Teachers: View academic details only
+    #Register time ,see date time in documen.
 

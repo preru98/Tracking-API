@@ -2,6 +2,7 @@ from rest_framework import serializers
 from studentAttendance.models import Tag,Student,Admin,TapTiming
 from django.utils import timezone
 
+
 class StudentSerializer(serializers.Serializer):
     enrollmentNumber=serializers.CharField(max_length=20)
     name=serializers.CharField(max_length=2000)
@@ -10,7 +11,7 @@ class StudentSerializer(serializers.Serializer):
     password=serializers.CharField(max_length=2000)
 
     def create(self, validated_data):
-        print(**validated_data)
+        #print(**validated_data)
         return Student.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
@@ -52,6 +53,9 @@ class TagSerializer(serializers.Serializer):
         newTag.save()
         return newTag
 
+class StudentAndTagRequestSerializer(serializers.Serializer):
+    tagUID=serializers.CharField(max_length=200)
+    studentEnroll=serializers.CharField(max_length=20)
 
 
 class TapTimingSerializer(serializers.Serializer):

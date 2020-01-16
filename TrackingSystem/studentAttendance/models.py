@@ -19,13 +19,13 @@ class Admin(models.Model):
 
 
 class Tag(models.Model):
-    tagUID=models.CharField(max_length=200)
-    student=models.OneToOneField(Student,on_delete=models.CASCADE,primary_key=True)
+    tagUID=models.CharField(max_length=200,primary_key=True)
+    student=models.OneToOneField(Student,on_delete=models.CASCADE)
 
 
 class TapTiming(models.Model):
     tapAt=models.DateTimeField(default=timezone.now)
-    tag=models.ForeignKey(Tag, on_delete=models.CASCADE)
+    tag=models.ForeignKey(Tag, to_field='tagUID',on_delete=models.CASCADE)
 
 
 
