@@ -10,7 +10,7 @@ class StudentSerializer(serializers.Serializer):
     year=serializers.CharField(max_length=2000)
     password=serializers.CharField(max_length=2000)
 
-    def create(self, validated_data):
+    def create(self, validated_data):        #create : +create()+ save()  
         #print(**validated_data)
         return Student.objects.create(**validated_data)
 

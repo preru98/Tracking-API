@@ -10,6 +10,7 @@ urlpatterns = [
     path('map/',views.tag_create),
     path('mapTag/',views.map_tag),
     path('viewTags/',views.tag_list),
+    path('TapTime/',views.tap_tag),
 ]
 
 # { "tag":"ABC",

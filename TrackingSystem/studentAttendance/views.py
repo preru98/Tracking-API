@@ -68,7 +68,7 @@ def student_update(request,enroll):
 
 
 @csrf_exempt
-def tag_create(request):
+def tag_create(request):                #wrong
    
     if request.method == 'POST':
         data = JSONParser().parse(request)
@@ -114,7 +114,20 @@ def map_tag(request):
         responseDict={
             'successful':True,
         }
-        # tagObject=JSONParser().parse(newTag)
+        return JsonResponse(responseDict,status=200)
+
+@csrf_exempt
+def tap_tag(request):
+
+    if request.method=='POST':
+        data=JSONParser().parse(request)
+        cardUID=data['card']
+        tagged=Tag.objects.get(pk=cardUID)
+        newTapTime=TapTiming(tag=tagged)
+        newTapTime.save()
+        responseDict={
+            'successful':True,
+        }
         return JsonResponse(responseDict,status=200)
 
 def tag_list(request):

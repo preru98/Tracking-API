@@ -11,6 +11,7 @@ class Student(models.Model):
     course=models.CharField(max_length=2000)
     year=models.CharField(max_length=2000)
     password=models.CharField(max_length=2000)
+    #att
 
 
 class Admin(models.Model):
