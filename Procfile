@@ -1,1 +1,1 @@
-web: python TrackingSyste/manage.py runserver 0.0.0.0:$PORT
+web: python TrackingSystem/manage.py runserver 0.0.0.0:$PORT
