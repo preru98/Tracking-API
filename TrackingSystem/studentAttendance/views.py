@@ -136,6 +136,19 @@ def tag_list(request):
         serializer = TagSerializer(allTags, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+def student_attendance_log(request,enroll):
+    if request.method=='GET':
+        studentVar=Student.objects.get(pk=enroll)
+        tagVar=studentVar.tag
+        tagVar.taptiming_set.all()
+        serializer=TapTimingSerializer(tagVar)
+        return JsonResponse(serializer.data)
+        #Todo POST
+
+
+
+    
+
 
 #Todo Register as alumni
 #Users:
@@ -143,4 +156,3 @@ def tag_list(request):
     #Admin   : CRUD on student
     #Teachers: View academic details only
     #Register time ,see date time in documen.
-
