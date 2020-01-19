@@ -1,0 +1,23 @@
+<html>
+    <head></head>
+    <body>
+        <script>
+            let url = 'https://still-harbor-14251.herokuapp.com/create/';
+            // let url = 'http://localhost:8000/create/';
+            let data = {
+                "enrollmentNumber": "31", 
+                "name": "Demo -", 
+                "course": "MCA ",
+                "year": "2",
+                "password": "passdsc3"
+            };
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then((response) => {document.write(response)},)
+        </script>
+    </body>
+</html>
