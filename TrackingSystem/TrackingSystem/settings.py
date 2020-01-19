@@ -26,13 +26,16 @@ SECRET_KEY = '04vj$-@3hwwjkxop4l3a2g+m%-cfyyc9k(!$9stsdks(1hd5n4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['still-harbor-14251.herokuapp.com']
+ALLOWED_HOSTS = ['still-harbor-14251.herokuapp.com',
+    'localhost'
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'rest_framework',
+    'corsheaders',
     'studentAttendance.apps.StudentattendanceConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +54,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS=['POST','GET']
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+]
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http://localhost:8000',
 ]
 
 ROOT_URLCONF = 'TrackingSystem.urls'
@@ -76,23 +91,34 @@ WSGI_APPLICATION = 'TrackingSystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ddtonc9dn9c2ta',
-        'USER': 'otkbteyxftbecv',
-        'PASSWORD': '71d71dfde8a6df0a46e9c981f5886717b147c359b36e9480687d3e266f52b90b',
-        'HOST': 'ec2-23-23-92-204.compute-1.amazonaws.com',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'HOST':'localhost'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'ddtonc9dn9c2ta',
+#         'USER': 'otkbteyxftbecv',
+#         'PASSWORD': '71d71dfde8a6df0a46e9c981f5886717b147c359b36e9480687d3e266f52b90b',
+#         'HOST': 'ec2-23-23-92-204.compute-1.amazonaws.com',
+#         'PORT': '',
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'ddtonc9dn9c2ta',
+#         'USER': 'otkbteyxftbecv',
+#         'PASSWORD': '71d71dfde8a6df0a46e9c981f5886717b147c359b36e9480687d3e266f52b90b',
+#         'HOST': 'ec2-23-23-92-204.compute-1.amazonaws.com',
+#         'PORT': '',
+#     }
+# }
 
 
 

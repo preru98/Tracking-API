@@ -35,7 +35,11 @@ def student_create(request):
         serializer = StudentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
+            response=JsonResponse(serializer.data)
+            response['Access-Control-Allow-Origin']:'https://foo.bar.org/'
+            
+            print(response)
+            return response
         return JsonResponse(serializer.errors, status=400)
 
 
@@ -136,14 +140,24 @@ def tag_list(request):
         serializer = TagSerializer(allTags, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+# def student_attendance_log(request,enroll):
+#     if request.method=='GET':
+#         studentVar=Student.objects.get(pk=enroll)
+#         tagVar=studentVar.tag
+#         tapLog=tagVar.taptiming_set.all()
+#         serializer=TapTimingSerializer(tapLog)
+#         return JsonResponse(serializer.data)
+#         #Todo POST ,403
+
 def student_attendance_log(request,enroll):
     if request.method=='GET':
         studentVar=Student.objects.get(pk=enroll)
-        tagVar=studentVar.tag
-        tagVar.taptiming_set.all()
-        serializer=TapTimingSerializer(tagVar)
-        return JsonResponse(serializer.data)
-        #Todo POST
+        tagVar=studentVar.tag  #Tag object
+        tapLog=tagVar.taptiming_set.all() #All taptimings of Tag object
+        serializer=TapTimingSerializer(tapLog,many=True)
+        return JsonResponse(serializer.data,safe=False)
+        #Todo POST ,403
+
 
 
 

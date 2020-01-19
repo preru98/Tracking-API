@@ -60,7 +60,7 @@ class StudentAndTagRequestSerializer(serializers.Serializer):
 
 class TapTimingSerializer(serializers.Serializer):
     tapAt=serializers.DateTimeField(default=timezone.now)
-    #tag=serializers.ForeignKey(Tag, on_delete=models.CASCADE)
+    #tag=serializers.CharField(max_length=200,read_only = True)
 
     def create(self, validated_data):
         return TapTiming.objects.create(**validated_data)
