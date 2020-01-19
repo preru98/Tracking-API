@@ -14,7 +14,6 @@ def student_list(request):
         return JsonResponse(serializer.data, safe=False)
 
 
-
 #Detail of a Student
 def student_detail(request,enroll):
     if request.method == 'GET':
@@ -55,6 +54,7 @@ def student_delete(request,enroll):
         student.delete()
         return HttpResponse(status=204)
 
+
 @csrf_exempt
 def student_update(request,enroll):
     try:
@@ -88,6 +88,7 @@ def tag_create(request):                #wrong
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+
 @csrf_exempt
 def map_tag(request):
 
@@ -105,6 +106,7 @@ def map_tag(request):
         tagObject=JSONParser().parse(newTag)
         return JsonResponse(tagObject,status=200)
 
+
 @csrf_exempt
 def map_tag(request):
 
@@ -120,6 +122,7 @@ def map_tag(request):
         }
         return JsonResponse(responseDict,status=200)
 
+
 @csrf_exempt
 def tap_tag(request):
 
@@ -133,6 +136,7 @@ def tap_tag(request):
             'successful':True,
         }
         return JsonResponse(responseDict,status=200)
+
 
 def tag_list(request):
     if request.method == 'GET':
@@ -148,6 +152,7 @@ def tag_list(request):
 #         serializer=TapTimingSerializer(tapLog)
 #         return JsonResponse(serializer.data)
 #         #Todo POST ,403
+
 
 def student_attendance_log(request,enroll):
     if request.method=='GET':
