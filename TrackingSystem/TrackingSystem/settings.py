@@ -91,13 +91,13 @@ WSGI_APPLICATION = 'TrackingSystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'HOST':'localhost'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'HOST':'localhost'
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -109,16 +109,16 @@ DATABASES = {
 #         'PORT': '',
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'ddtonc9dn9c2ta',
-#         'USER': 'otkbteyxftbecv',
-#         'PASSWORD': '71d71dfde8a6df0a46e9c981f5886717b147c359b36e9480687d3e266f52b90b',
-#         'HOST': 'ec2-23-23-92-204.compute-1.amazonaws.com',
-#         'PORT': '',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ddtonc9dn9c2ta',
+        'USER': 'otkbteyxftbecv',
+        'PASSWORD': '71d71dfde8a6df0a46e9c981f5886717b147c359b36e9480687d3e266f52b90b',
+        'HOST': 'ec2-23-23-92-204.compute-1.amazonaws.com',
+        'PORT': '',
+    }
+}
 
 
 
