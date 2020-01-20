@@ -187,11 +187,11 @@ def student_login(request):
         
         if(student.password==loginPass):
             responseDict={
-                'Authentication':successful,
+                'Authentication':True,
             }
         else:
             responseDict={
-                'Authentication':failed,
+                'Authentication':False,
             }
         return JsonResponse(responseDict,status=200)
 
