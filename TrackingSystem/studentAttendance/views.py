@@ -56,7 +56,7 @@ def student_delete(request,enroll):
         return HttpResponse(status=204)
 
 
-#Register Student  
+#Update Student  
 @csrf_exempt
 def student_update(request,enroll):
     try:

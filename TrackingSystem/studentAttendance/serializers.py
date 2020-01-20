@@ -59,7 +59,7 @@ class StudentAndTagRequestSerializer(serializers.Serializer):
 
 
 class TapTimingSerializer(serializers.Serializer):
-    tapAt=serializers.DateTimeField(default=timezone.now)
+    tapAt=serializers.DateTimeField(default=timezone.now,format=" %A, %d %B %Y at %H:%M:%S")
     #tag=serializers.CharField(max_length=200,read_only = True)
 
     def create(self, validated_data):
