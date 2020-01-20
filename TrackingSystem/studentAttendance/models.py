@@ -27,12 +27,3 @@ class Tag(models.Model):
 class TapTiming(models.Model):
     tapAt=models.DateTimeField(default=timezone.now)
     tag=models.ForeignKey(Tag, to_field='tagUID',on_delete=models.CASCADE)
-
-
-
-
-    
-
-
-
-

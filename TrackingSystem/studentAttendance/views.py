@@ -42,6 +42,7 @@ def student_create(request):
         return JsonResponse(serializer.errors, status=400)
 
 
+#Register Student  
 @csrf_exempt
 def student_delete(request,enroll):
     print (request.method)
@@ -55,6 +56,7 @@ def student_delete(request,enroll):
         return HttpResponse(status=204)
 
 
+#Register Student  
 @csrf_exempt
 def student_update(request,enroll):
     try:
@@ -69,6 +71,7 @@ def student_update(request,enroll):
             serializer.save()
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
+
 
 
 @csrf_exempt
@@ -88,7 +91,7 @@ def tag_create(request):                #wrong
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
-
+#wrong
 @csrf_exempt
 def map_tag(request):
 
@@ -107,6 +110,7 @@ def map_tag(request):
         return JsonResponse(tagObject,status=200)
 
 
+#Map tag with student   
 @csrf_exempt
 def map_tag(request):
 
@@ -123,6 +127,7 @@ def map_tag(request):
         return JsonResponse(responseDict,status=200)
 
 
+#Tap card on device
 @csrf_exempt
 def tap_tag(request):
 
@@ -138,6 +143,7 @@ def tap_tag(request):
         return JsonResponse(responseDict,status=200)
 
 
+#List all tags
 def tag_list(request):
     if request.method == 'GET':
         allTags = Tag.objects.all()
@@ -153,7 +159,7 @@ def tag_list(request):
 #         return JsonResponse(serializer.data)
 #         #Todo POST ,403
 
-
+#Student Attendance Log
 def student_attendance_log(request,enroll):
     if request.method=='GET':
         studentVar=Student.objects.get(pk=enroll)
@@ -164,9 +170,32 @@ def student_attendance_log(request,enroll):
         #Todo POST ,403
 
 
+#student Login
+@csrf_exempt
+def student_login(request):
 
+    if request.method=='POST':
+        data=JSONParser().parse(request)
 
-    
+        userID=data['username']
+        loginPass=data['password']
+
+        try:
+            student=Student.objects.get(pk=userID)
+        except Student.DoesNotExist:
+            return HttpResponse(status=404)
+        
+        if(student.password==loginPass):
+            responseDict={
+                'Authentication':successful,
+            }
+        else:
+            responseDict={
+                'Authentication':failed,
+            }
+        return JsonResponse(responseDict,status=200)
+
+        
 
 
 #Todo Register as alumni
@@ -175,3 +204,4 @@ def student_attendance_log(request,enroll):
     #Admin   : CRUD on student
     #Teachers: View academic details only
     #Register time ,see date time in documen.
+

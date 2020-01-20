@@ -3,15 +3,15 @@ from .import views
 
 urlpatterns = [
     path('', views.student_list),
-    path('detail/<int:enroll>/',views.student_detail),
-    path('create/',views.student_create),
-    path('delete/<int:enroll>/',views.student_delete),
-    path('update/<int:enroll>/',views.student_update),
-    path('map/',views.tag_create),
-    path('mapTag/',views.map_tag),
-    path('viewTags/',views.tag_list),
-    path('TapTime/',views.tap_tag),   #Tap card
-    path('Log/<int:enroll>/',views.student_attendance_log),
+    path('detail/<int:enroll>/',views.student_detail),      #get details by roll number
+    path('create/',views.student_create),                   #register student
+    path('delete/<int:enroll>/',views.student_delete),      #delete student
+    path('update/<int:enroll>/',views.student_update),      #update
+    path('map/',views.tag_create),                          #wrong
+    path('mapTag/',views.map_tag),                          #map tag with existing student
+    path('viewTags/',views.tag_list),                       #view all tags
+    path('TapTime/',views.tap_tag),                         #Tap card       
+    path('Log/<int:enroll>/',views.student_attendance_log), #attendance log of every student
 ]
 
 # { "tag":"ABC",
