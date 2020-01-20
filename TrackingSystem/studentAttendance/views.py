@@ -182,7 +182,10 @@ def student_login(request):
 
         try:
             student=Student.objects.get(pk=userID)
+            print(student.name)
+
         except Student.DoesNotExist:
+            print("Caught")
             return HttpResponse(status=404)
         
         if(student.password==loginPass):
@@ -196,6 +199,34 @@ def student_login(request):
         return JsonResponse(responseDict,status=200)
 
         
+#Admin Login
+@csrf_exempt
+def admin_login(request):
+
+    if request.method=='POST':
+        data=JSONParser().parse(request)
+
+        userID=data['username']
+        loginPass=data['password']
+
+        try:
+            admin=Admin.objects.get(adminID=userID)
+            print(admin.adminID)
+
+        except Admin.DoesNotExist:
+            print("Caught")
+            return HttpResponse(status=404)
+        
+        if(admin.password==loginPass):
+            responseDict={
+                'Authentication':True,
+            }
+        else:
+            responseDict={
+                'Authentication':False,
+            }
+        return JsonResponse(responseDict,status=200)
+
 
 
 #Todo Register as alumni

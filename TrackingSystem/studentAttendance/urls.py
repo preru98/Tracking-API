@@ -13,7 +13,9 @@ urlpatterns = [
     path('TapTime/',views.tap_tag),                         #Tap card       
     path('Log/<int:enroll>/',views.student_attendance_log), #attendance log of every student
     path('studentLogin/',views.student_login),              #student login
+    path('adminLogin/',views.admin_login),                  #admin login
 ]
+
 
 # { "tag":"ABC",
 #    "studentRollNumber":"3" 
