@@ -12,6 +12,7 @@ urlpatterns = [
     path('viewTags/',views.tag_list),                       #view all tags
     path('TapTime/',views.tap_tag),                         #Tap card       
     path('Log/<int:enroll>/',views.student_attendance_log), #attendance log of every student
+    path('studentLogin/',views.student_login),              #student login
 ]
 
 # { "tag":"ABC",
