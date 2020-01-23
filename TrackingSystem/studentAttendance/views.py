@@ -92,22 +92,22 @@ def tag_create(request):                #wrong
         return JsonResponse(serializer.errors, status=400)
 
 #wrong
-@csrf_exempt
-def map_tag(request):
+# @csrf_exempt
+# def map_tag(request):
 
-    if request.method=='POST':
-        data=JSONParser().parse(request)
-        enroll=data['studentRollNumber']
-        student=Student.objects.get(pk=enroll)
-        tagId=data['tag']
-        newTag=Tag(tagUID=tagId,student=student)
-        newTag.save()
-        responseDict={
-            'successful':True,
+#     if request.method=='POST':
+#         data=JSONParser().parse(request)
+#         enroll=data['studentRollNumber']
+#         student=Student.objects.get(pk=enroll)
+#         tagId=data['tag']
+#         newTag=Tag(tagUID=tagId,student=student)
+#         newTag.save()
+#         responseDict={
+#             'successful':True,
 
-            }
-        tagObject=JSONParser().parse(newTag)
-        return JsonResponse(tagObject,status=200)
+#             }
+#         tagObject=JSONParser().parse(newTag)
+#         return JsonResponse(tagObject,status=200)
 
 
 #Map tag with student   
